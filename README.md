@@ -118,3 +118,4 @@ We just take the easing equation for say easeOutElastic
 ```
 
 Once created, we just call tween.start() to set it off
+will utilise requestTimeout if available
