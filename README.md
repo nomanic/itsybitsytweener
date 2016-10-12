@@ -55,9 +55,9 @@ document.getElementById('button').onclick=function() {
 
 ## Interpolation
 
-to gain new values for say x, we have x_start, x_end and a value for t (tw)
-the step function is passed ar & tw, where ar is our target data and tw is our tween value between 0 and 1
-we just then interpolate between x_start and x_end
+to gain new values for say x, we have x_start, x_end and a value for t (tw)   
+the step function is passed ar & tw, where ar is our target data and tw is our tween value between 0 and 1   
+we just then interpolate between x_start and x_end   
 
 ```
 current_x=easer.interp(x_start,x_end,tw);
@@ -67,36 +67,36 @@ If we want to interpolate between 2 hexadecimal values we use interphex in exact
 
 ## Options
 
-Basically when you create a tween, you define what it will do, it only ever tweens between 0 and 1
+Basically when you create a tween, you define what it will do, it only ever tweens between 0 and 1   
 we then use this number to interpolate our values we wish to impose on the element
 
 ### Mandatory Options
 
-duration, total duration of tween
-step, a function to perform at each step of the tween (this is basically the function that updates the element)
+**duration**, total duration of tween   
+**step**, a function to perform at each step of the tween (this is basically the function that updates the element)
 
 ### Optional Options
 
-easing, the easing function to use
-4 are defined in the easer variable
-easer.easeInOutQuad
-easer.easeOutElastic
-easer.easeOutBounce
-easer.easeInOutSine
+**easing**, the easing function to use   
+4 are defined in the easer variable   
+easer.easeInOutQuad   
+easer.easeOutElastic   
+easer.easeOutBounce   
+easer.easeInOutSine   
 If easing isn't specified, it's just linear
 
-target, this is just a helper variable
-[document.getElementById('box'),[100,100],[400,400],['FF0000','00FF00']]
-it can be defined anyway you want
-Here, it's just the element, then 3 pairs of values for old & new x,y and color values
+**target**, this is just a helper variable   
+[document.getElementById('box'),[100,100],[400,400],['FF0000','00FF00']]   
+it can be defined anyway you want   
+Here, it's just the element, then 3 pairs of values for old & new x,y and color values   
 
-finish, a function to call on completion
+**finish**, a function to call on completion
 
-autorun, tween will begin straight after it has been created
+**autorun**, tween will begin straight after it has been created
 
 ## Adding Easing Equations
 
-Because this tweener only ever runs between 0 and 1, all the easing equations are greatly simplified
+Because this tweener only ever runs between 0 and 1, all the easing equations are greatly simplified   
 We just take the easing equation for say easeOutElastic
 
 ```
