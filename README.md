@@ -147,5 +147,6 @@ fadeIn=function(elem,duration) {
 	document.getElementById(elem).style.display='block';
 	fader(elem,0,1,duration);
 }
+</script>
 ```
 
