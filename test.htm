@@ -1,0 +1,26 @@
+<script type="text/javascript" src="itsybitsytweener.js"></script>
+
+<div id="box" style="position:absolute;top:100px;left:100px;width:100px;height:100px;background-color:#ff0000;"></div>
+
+<div id="button" style="position:absolute;top:0px;left:0px;width:100px;height:100px;background-color:#0000ff;cursor:pointer;"></div>
+
+<script type="text/javascript">
+var tween=new tweenable();
+tween.create({
+	duration:	2000,
+	easing:		easer.easeOutElastic,
+	target:		[document.getElementById('box'),[100,100],[400,400],['FF0000','00FF00']],
+	step:		function(ar,tw) {
+					ar[0].style.left=easer.interp(ar[1][0],ar[2][0],tw)+'px';
+					ar[0].style.top=easer.interp(ar[1][1],ar[2][1],tw)+'px';
+					ar[0].style.backgroundColor=easer.interphex(ar[3][0],ar[3][1],tw);
+				},
+	finish:		function() {
+					alert('moved!');
+				}
+});
+
+document.getElementById('button').onclick=function() {
+	tween.start();
+}
+</script>

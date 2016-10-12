@@ -34,7 +34,7 @@ var easer={
 		return ((tw*=0.5) < 1)?(0.5*tw*tw):(-0.5 * ((--tw)*(tw-2) - 1));
 	},
 	easeOutElastic:function(tw) {
-		return ((tw==0)||(tw==1))?t:(Math.pow(2,-10*tw) * Math.sin( (tw-easer.cl)*easer.pi3 ) + 1);
+		return ((tw==0)||(tw==1))?tw:(Math.pow(2,-10*tw) * Math.sin( (tw-easer.cl)*easer.pi3 ) + 1);
 	},
 	easeOutBounce:function(tw) {
 		return (tw < 0.36364)?(7.5625*tw*tw):((tw < 0.7273)?(7.5625*(tw-=0.5454)*tw + .75):((tw < 0.9091)?(7.5625*(tw-=0.8182)*tw + .9375):(7.5625*(tw-=0.95454)*tw + .984375)));
