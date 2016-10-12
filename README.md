@@ -119,3 +119,33 @@ We just take the easing equation for say easeOutElastic
 
 Once created, we just call tween.start() to set it off
 will utilise requestTimeout if available
+
+## Useful Fade Function
+
+```
+<script type="text/javascript">
+fader=function(v,v0,v1,d,fn) {
+	var tween=new tweenable();
+	tween.create({
+		duration:	d,
+		target:		[document.getElementById(v),[v0,v1]],
+		step:		function(ar,tw) {
+						var x=easer.interp(ar[1][0],ar[1][1],tw);
+						ar[0].style.opacity=x;
+						ar[0].style.filter='alpha(opacity='+Math.floor(x*10)+')';
+					},
+		autorun:	1,
+		finish:		fn
+	});
+}
+
+fadeOut=function(elem,duration) {
+	fader(elem,1,0,duration,function() {document.getElementById(elem).style.display='none';});
+}
+
+fadeIn=function(elem,duration) {
+	document.getElementById(elem).style.display='block';
+	fader(elem,0,1,duration);
+}
+```
+
