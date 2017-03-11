@@ -9,20 +9,28 @@
  * @license    Dual licensed under MIT and GPL
  */
 var tweenable=function() {
+	this.stopped=false;
 	this.create=function(options) {
 		this.duration=options.duration;
 		this.easing=options.easing;
 		this.target=options.target;
 		this.animate=options.step;
-		this.finish=options.finish;
+		this.abort=options.abort;
+		this.finish=options.finish?options.finish:(function() {});
 		this.autorun=options.autorun?this.start():0;
 	}
 	this.start=function() {
 		this.d0=new Date().getTime();
+		this.stopped=false;
 		this.run();
 	}
+	this.stop=function() {
+		this.stopped=1;
+		var iw=this.abort?this.abort(this.target,0):0;
+	}
 	this.run=function() {
-		var i,self = this,tdif=(new Date().getTime()-this.d0)/this.duration,iw=(i=(tdif>1))?this.animate(this.target,1)+this.finish():this.animate(this.target,this.easing?this.easing(tdif):tdif);
+		var self = this,tdif=(new Date().getTime()-this.d0)/this.duration,i=(tdif>1),iw=i?this.animate(this.target,1)+this.finish(this.target,1):this.animate(this.target,this.easing?this.easing(tdif):tdif);
+		if (this.stopped) {return;}
 		return i?0:((typeof window.requestTimeout === "function")?requestTimeout(function(){self.run();},50):setTimeout(function(){self.run();},50));
 	}
 };
@@ -31,7 +39,8 @@ var easer={
 	cl:0.3/(2*Math.PI)*Math.asin(1),
 	pi3:(2*Math.PI)/0.3,
 	easeInOutQuad:function(tw) {
-		return ((tw*=0.5) < 1)?(0.5*tw*tw):(-0.5 * ((--tw)*(tw-2) - 1));
+		if ((tw/=0.5) < 1) return (tw/2);
+		return -tw/2 * ((tw-1)*(tw-2) - 1);
 	},
 	easeOutElastic:function(tw) {
 		return ((tw==0)||(tw==1))?tw:(Math.pow(2,-10*tw) * Math.sin( (tw-easer.cl)*easer.pi3 ) + 1);
